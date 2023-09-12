@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+Cars
+<div th:each="car : ${cars}">
+    Авто - <b th:text="${car.getModel()}"></b>
+    <b th:text="${car.getSeries()}"></b> ,
+    Владелец - <b th:text="${car.getCarOwner()}"></b>
+</div>
+</body>
+</html>
