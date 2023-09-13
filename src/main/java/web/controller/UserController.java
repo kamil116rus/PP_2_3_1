@@ -49,7 +49,26 @@ public class UserController {
         }
         return "redirect:/";
     }
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("user", userServise.getUserById(id));
+        return "edit";
+    }
 
+   @PostMapping("/edit")
+    public String update( @Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        } else {
+            userServise.updateUser(user);
+        }
+        return"redirect:/{id}";
+    }
+    @DeleteMapping("/delete/{id}")
+    public  String delete(@PathVariable("id") Long id) {
+         userServise.removeUser(id);
+        return "redirect:/";
+    }
 
 
 }

@@ -33,11 +33,12 @@ public class UserDaolmpl implements UserDao {
 
     @Override
     public void removeUser(Long id) {
+        entityManager.remove(getUserById(id));
 
     }
 
     @Override
     public void updateUser(User user) {
-
+        entityManager.merge(user);
     }
 }

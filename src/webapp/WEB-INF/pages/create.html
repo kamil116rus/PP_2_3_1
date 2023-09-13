@@ -2,20 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
+
 <form th:method="POST" th:action="@{/new}" th:object="${user}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{firstName}" id="name"/>
-    <br/>
-    <label for="lastname">Enter lastname: </label>
-    <input type="text" th:field="*{lastName}" id="lastname"/>
-    <br>
-    <label for="age">Enter age: </label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <br>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>LasName</th>
+            <th>Age</th>
+        </tr>
+        <td>
+            <label for="fistName">Enter name: </label>
+            <input type="text" th:field="*{firstName}" id="fistName"/>
+        </td>
+        <td>
+            <label for="lastname">Enter lastname: </label>
+            <input type="text" th:field="*{lastName}" id="lastName"/>
+        </td>
+        <td>
+            <label for="age">Enter age: </label>
+            <input type="number" min="0" max="100" th:field="*{age}" id="age"/>
+
+        </td>
+    </table>
     <input type="submit" value="Create!"/>
+    <input type="submit" onclick="window.location.href = '/' "value="Back to UsersTable"/>
 </form>
 </body>
+
 </html>
