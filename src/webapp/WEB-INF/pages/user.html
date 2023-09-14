@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -18,6 +19,7 @@
         <td th:text="${user.getAge()}">Age</td>
     </tr>
 </table>
+<br>
 <form th:action="@{'edit/' + ${user.getId()}}">
     <input type="submit" class="buttonEdit" value="Edit User"/>
 </form>

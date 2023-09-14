@@ -15,6 +15,7 @@ public class UserDaolmpl implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("select u from User u", User.class).getResultList();
@@ -34,11 +35,12 @@ public class UserDaolmpl implements UserDao {
     @Override
     public void removeUser(Long id) {
         entityManager.remove(getUserById(id));
-
     }
 
     @Override
     public void updateUser(User user) {
+        // entityManager.getTransaction().begin();
         entityManager.merge(user);
+
     }
 }

@@ -4,7 +4,7 @@ import web.model.User;
 
 import java.util.List;
 
-public interface UserServise  {
+public interface UserService {
     List<User> getAllUsers();
     User getUserById(Long id);
     public void addUser(User user);

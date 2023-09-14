@@ -10,12 +10,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiselmpl implements UserServise{
-    @Autowired
-    private UserDao userDao;
-
+public class UserServicelmpl implements UserService {
+    private final UserDao userDao;
 
     @Autowired
+    public UserServicelmpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
 
     @Override

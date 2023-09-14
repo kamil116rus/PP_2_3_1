@@ -7,31 +7,30 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
-import web.servise.UserServise;
+import web.servise.UserService;
 
 import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("/")
 public class UserController {
-    private final UserServise userServise;
+    private final UserService userService;
 
 
     @Autowired
-    public UserController(UserServise userServise) {
-        this.userServise= userServise;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping
-    public String table(Model model ){
-        model.addAttribute("users", userServise.getAllUsers());
+    @GetMapping("/")
+    public String table(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
         return "table";
     }
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userServise.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "user";
     }
 
@@ -45,28 +44,30 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "create";
         } else {
-            userServise.addUser(user);
+            userService.addUser(user);
         }
         return "redirect:/";
     }
+
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userServise.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
 
-   @PostMapping("/edit")
-    public String update( @Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model){
+    @PostMapping("/edit")
+    public String update(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "edit";
         } else {
-            userServise.updateUser(user);
+            userService.updateUser(user);
         }
-        return"redirect:/{id}";
+        return "redirect:/";
     }
-    @DeleteMapping("/delete/{id}")
-    public  String delete(@PathVariable("id") Long id) {
-         userServise.removeUser(id);
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        userService.removeUser(id);
         return "redirect:/";
     }
 
